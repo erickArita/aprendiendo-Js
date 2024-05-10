@@ -1,21 +1,21 @@
 //dfeinir un objeto
 const estudiante = {
-  nombre: 'Juan',
+  nombre: "Juan",
   edad: 20,
-  curso: 'JS Avanzado',
-}
+  curso: "JS Avanzado",
+};
 
 const estudiante2 = {
-  nombre: 'Juan',
+  nombre: "Juan",
   edad: 20,
-  curso: 'JS Avanzado',
+  curso: "JS Avanzado",
   aumentarEdad: function () {
-    this.edad++
-  }
-}
+    this.edad++;
+  },
+};
+
 //propiedades
 // no se puede agregar elementos duplicados
-
 
 // //agregar propiedades
 // estudiante.matriculado = true
@@ -34,8 +34,7 @@ const estudiante2 = {
 // //agregar propiedades dinamicamente const sintaxis de corchetes
 // estudiante[intputPropiedad] = 'Maria'
 
-
 // console.log(estudiante === estudiante2)
 
-
-
+//Como copiar un objeto
+const estudianteCopia = { ...estudiante };
