@@ -3,6 +3,8 @@ const $btnAgregar = document.querySelector("#agregar");
 const $lista = document.querySelector("#tareas");
 
 const tareas = [];
+let seEstaEditando = false;
+let valorAnterior = "";
 
 const agregarTarea = (tarea) => {
   tareas.push(tarea);
@@ -22,7 +24,7 @@ const limpiarInput = () => {
 };
 
 const render = () => {
-  const items = tareas.map((tarea) => `<li  >${tarea}</li>`);
+  const items = tareas.map((tarea) => `<li>${tarea}</li>`);
   $lista.innerHTML = items.join("");
 };
 
@@ -33,16 +35,40 @@ const onDelete = (e) => {
 };
 
 $btnAgregar.addEventListener("click", () => {
-  const value = obtenerTarea();
-  agregarTarea(value);
-  // agregarLiALista(value);
+  if (seEstaEditando) {
+    onEdit();
+  } else {
+    const value = obtenerTarea();
+    agregarTarea(value);
+  }
   limpiarInput();
   render();
 });
 
 $lista.addEventListener("click", (e) => {
-  onDelete(e);
+  //si ctrlKey es true, entonces edita
+  if (e.ctrlKey) {
+    onInitEdit(e);
+    seEstaEditando = true;
+  } else {
+    onDelete(e);
+  }
   render();
 });
 
-//todo: HACER ELIMINAR TAREA (UN CLIC) Y EDITAR TAREAS (CON DOBLE CLICK)
+const onInitEdit = (e) => {
+  const text = e.target.textContent;
+  $btnAgregar.textContent = "Editar";
+  $input.value = text;
+  valorAnterior = text;
+};
+
+const onEdit = () => {
+  const nuevoValor = $input.value;
+
+  const posicion = tareas.indexOf(valorAnterior);
+  tareas.splice(posicion, 1, nuevoValor);
+
+  $btnAgregar.textContent = "Crear";
+  seEstaEditando = false;
+};
