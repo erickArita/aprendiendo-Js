@@ -7,7 +7,7 @@ let seEstaEditando = false;
 let valorAnterior = "";
 
 const esTareaVacia = (tarea) => {
-  const esVacia = tarea.trim() === tarea;
+  const esVacia = tarea.trim() === "";
 
   if (esVacia) {
     alert("La tarea no puede estar vacía");
