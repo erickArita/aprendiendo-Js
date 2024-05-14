@@ -9,11 +9,21 @@ $aumentarBtn.addEventListener("click", () => {
   render();
 });
 
+const isMenorACero = (contador) => {
+  if (contador <= 0) {
+    alert("El contador no puede ser menor a 0");
+    return true;
+  } else {
+    return false;
+  }
+};
+
 $disminuirBtn.addEventListener("click", () => {
+  if (isMenorACero(contador)) return;
   contador--;
   render();
 });
 
 function render() {
-  $contador.innerHTML = '<h1>' + contador + '</h1>';
+  $contador.textContent = contador;
 }

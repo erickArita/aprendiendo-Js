@@ -6,8 +6,19 @@ const tareas = [];
 let seEstaEditando = false;
 let valorAnterior = "";
 
+const esTareaVacia = (tarea) => {
+  const esVacia = tarea.trim() === tarea;
+
+  if (esVacia) {
+    alert("La tarea no puede estar vacía");
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const agregarTarea = (tarea) => {
-  tareas.push(tarea);
+  if (!esTareaVacia(tarea)) tareas.unshift(tarea);
 };
 
 // const agregarLiALista = (tarea) => {
