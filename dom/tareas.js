@@ -1,10 +1,25 @@
+import {
+  getItemFromLocalStorage,
+  setItemInLocalStorage,
+} from "./utils/localStorage.js";
+
 const $input = document.querySelector("#tarea");
 const $btnAgregar = document.querySelector("#agregar");
 const $lista = document.querySelector("#tareas");
 
-const tareas = [];
+const render = () => {
+  const items = tareas.map((tarea) => `<li>${tarea}</li>`);
+  $lista.innerHTML = items.join("");
+};
+
+const getInicialState = () => {
+  return getItemFromLocalStorage("tareas") ?? [];
+};
+const tareas = getInicialState();
+
 let seEstaEditando = false;
 let valorAnterior = "";
+render();
 
 const esTareaVacia = (tarea) => {
   const esVacia = tarea.trim() === "";
@@ -18,7 +33,10 @@ const esTareaVacia = (tarea) => {
 };
 
 const agregarTarea = (tarea) => {
-  if (!esTareaVacia(tarea)) tareas.unshift(tarea);
+  if (!esTareaVacia(tarea)) {
+    tareas.unshift(tarea);
+    setItemInLocalStorage("tareas", tareas);
+  }
 };
 
 // const agregarLiALista = (tarea) => {
@@ -34,15 +52,12 @@ const limpiarInput = () => {
   $input.value = "";
 };
 
-const render = () => {
-  const items = tareas.map((tarea) => `<li>${tarea}</li>`);
-  $lista.innerHTML = items.join("");
-};
-
 const onDelete = (e) => {
   const text = e.target.textContent;
   const index = tareas.indexOf(text);
   tareas.splice(index, 1);
+
+  setItemInLocalStorage("tareas", tareas);
 };
 
 $btnAgregar.addEventListener("click", () => {
@@ -79,7 +94,16 @@ const onEdit = () => {
 
   const posicion = tareas.indexOf(valorAnterior);
   tareas.splice(posicion, 1, nuevoValor);
-
+  setItemInLocalStorage("tareas", tareas);
   $btnAgregar.textContent = "Crear";
   seEstaEditando = false;
 };
+
+// la fuente de nuestra información inicialmente será localStorage y luego será nuestro array en memoria
+// 1. obtener datos de local storage si hay, obtener un estado inicial
+// 2.por cada operacion que se haga al array, tambien hacerlo en localStorage
+//   1. guardar cada tarea en local storage
+//   2. guardar en memoria cada tarea nuestro array en memoria
+//   3. eliminar en ambos lugares
+//   4. editar en ambos lugares
+// 3. renderizar las tareas
