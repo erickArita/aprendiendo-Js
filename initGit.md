@@ -57,7 +57,8 @@ mandar esos cambios para github, si la rama no existe en github, se crea
 crear rama remota
 
 ```bash
- git push
+  git push
+  si se necesita crear la rama
   git push --set-upstream origin bases_de_git
 
 ```
@@ -74,3 +75,7 @@ para obtener los cambios de una rama
 ```bash
 git pull
 ```
+
+como unir ramas, primero moverse para la rama a la que quiero mandar cambios
+```bash
+  
