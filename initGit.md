@@ -54,9 +54,12 @@ git commit -m "Add: local storage para tareas"
 ```
 
 mandar esos cambios para github, si la rama no existe en github, se crea
+crear rama remota
 
 ```bash
-git push
+ git push
+  git push --set-upstream origin bases_de_git
+
 ```
 
 para obtener todas las ramas que estan en github
