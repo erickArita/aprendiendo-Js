@@ -54,3 +54,5 @@ autoToyota.apagar();
 autoToyota.mostrarInfo();
 autoToyota.marca = "hola";
 console.log(autoToyota);
+
+//TODO hacer un ejemplo con el dom y clases
