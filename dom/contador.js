@@ -27,3 +27,12 @@ $disminuirBtn.addEventListener("click", () => {
 function render() {
   $contador.textContent = contador;
 }
+
+function func(name) {
+  return {
+    nombre: name,
+    saludar: function() {
+      console.log(`Hola ${this.nombre}`);
+    }
+  };
+}
