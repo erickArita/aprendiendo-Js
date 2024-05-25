@@ -1,4 +1,4 @@
-//Herencia y polimorfismo
+//Herencia y polimorfismo , encapsulacion y abstraccion
 class Vehiculo {
   constructor(marca, modelo, precio) {
     this.marca = marca;
